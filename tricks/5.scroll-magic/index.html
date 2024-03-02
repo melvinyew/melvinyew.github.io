@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #222;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 4rem;
+      display: flex;
+      font-weight: 400;
+      -webkit-box-reflect: below -38px linear-gradient(transparent, #0002);
+    }
+
+    h1 span:nth-child(n+14) {
+      color: #0f0;
+    }
+
+    .side-notes {
+      position: absolute;
+      color: #fff;
+      top: 1rem;
+      right: 1rem;
+      writing-mode: vertical-lr;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Scroll&nbsp;to&nbsp;see&nbsp;MAGIC</h1>
+  </div>
+  <div class="side-notes">
+    <h2>try to scroll? ➡️</h2>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  let text = document.querySelector('h1')
+  let textString = text.textContent
+  let split = textString.split("")
+  text.textContent = ""
+  for (let i = 0; i < split.length; i++) {
+    text.innerHTML += "<span>" + split[i] + "</span>"
+  }
+  let tl = gsap.timeline()
+  // scroll trigger
+  tl.from("span", {
+    y: -500,
+    opacity: 0,
+    scrollTrigger: {
+      pin: true,
+      scrub: 1,
+      trigger: "div",
+    },
+    stagger: {
+      amount: 1
+    }
+  })
+</script>
+
+</html>

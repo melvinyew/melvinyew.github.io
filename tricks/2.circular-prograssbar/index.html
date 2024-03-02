@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="card card-html">
+    <div class="rating">
+      <h2>
+        <span class="counter" data-target="90">90</span>
+        <sup>%</sup>
+        <br>
+        HTML
+      </h2>
+    </div>
+  </div>
+  <div class="card card-css">
+    <div class="rating">
+      <h2>
+        <span class="counter" data-target="40">40</span>
+        <sup>%</sup>
+        <br>
+        CSS
+      </h2>
+    </div>
+  </div>
+  <div class="card card-js">
+    <div class="rating">
+      <h2>
+        <span class="counter" data-target="70">70</span>
+        <sup>%</sup>
+        <br>
+        JavaScript
+      </h2>
+    </div>
+  </div>
+  <script>
+    const ratings = document.getElementsByClassName('rating')
+    let index = 0
+    for (const rating of ratings) {
+      for (let i = 0; i < 100; i++) {
+        rating.innerHTML += '<div class="block"></div>'
+        const block = document.getElementsByClassName('block')
+        block[i + index * 100].style.transform = "rotate(" + i * 3.6 + "deg)"
+        block[i + index * 100].style.animationDelay = `${i / 40}s`
+      }
+
+      const counter = document.querySelectorAll('.counter')[index]
+      counter.innerText = 0
+
+      // '+' before a string variable convert it to a number
+      const target = +counter.getAttribute('data-target')
+
+      // Number Count Animation
+      const NumberCounter = () => {
+        const value = +counter.innerText
+        if (value < target) {
+          counter.innerText = Math.ceil(value + 1)
+          setTimeout(() => {
+            NumberCounter()
+          }, 25)
+        }
+      }
+
+      NumberCounter()
+
+      // Progress Bar Animation
+      const blocksAll = Array.from(document.querySelectorAll('.card .rating .block'))
+      const blocks = blocksAll.slice(index * 100, index * 100 + 100)
+      for (let i = 0; i < blocks.length; i++) {
+        if (i < target) {
+          switch (index) {
+            case 0:
+              blocks[i].classList.add('block-html')
+              break
+            case 1:
+              blocks[i].classList.add('block-css')
+              break
+            case 2:
+              blocks[i].classList.add('block-js')
+              break
+            default:
+              break
+          }
+        }
+      }
+
+
+      index++
+    }
+
+  </script>
+</body>
+
+</html>
