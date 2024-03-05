@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click Magic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #222;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 200px;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: 800;
+      letter-spacing: 2rem;
+      /* -webkit-box-reflect: below -20px linear-gradient(transparent, #0002); */
+    }
+
+    .container {
+      position: absolute;
+      top: 0;
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .container .box {
+      display: block;
+      width: 48px;
+      height: 48px;
+      background-color: #ccc;
+      border: #000 solid 1px;
+    }
+
+    .container .box.active {
+      background-color: #0f0;
+      pointer-events: none;
+      box-shadow: 0 0 10px #0f05, 0 0 30px #0f05, 0 0 80px #0f05, 0 0 80px #0f05;
+      z-index: 100;
+      animation: animate 2s linear forwards;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(0, 100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>兴趣使然</h1>
+  <div class="container"></div>
+</body>
+<script>
+  let container = document.querySelector('.container')
+  let count = 600
+  let trigger = true
+  if (trigger) {
+    for (let i = 0; i < count; i++) {
+      let box = document.createElement('div')
+      box.classList.add('box')
+      container.appendChild(box)
+    }
+    let box = document.querySelectorAll('.box')
+    for (let i = 0; i < box.length; i++) {
+      let duration = Math.random() * 3
+      let colorRotation = Math.random() * 360
+      box[i].addEventListener('mouseover', () => {
+        box[i].classList.add('active')
+        box[i].style.animationDuration = 1 + duration + 's'
+        box[i].style.filter = `hue-rotate(${colorRotation}deg)`
+      })
+    }
+  }
+</script>
+
+</html>
