@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .canvas {
+    width: 100%;
+  }
+
+  .canvas #base {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  #stripes {
+    left: -10vw;
+    top: 60vh;
+    border: 2px solid black;
+    width: 717px;
+    height: 612px;
+    background-image: url("./img/Scanimation\ Str.png");
+  }
+
+  .dragItem,
+  .sprite {
+    display: block;
+    position: absolute;
+  }
+</style>
+
+<body>
+  <!-- TODO more pictures -->
+  <div class="canvas">
+    <img src="./img/Scanimation Cat.png" id="base" class="sprite">
+    <div id="stripes" class="dragItem" style="z-index: 100; cursor: auto;" draggable="true">&nbsp;
+    </div>
+  </div>
+</body>
+
+<script>
+  let dragItem = document.querySelector('.dragItem')
+  initialOffset = [0, 0]
+  function dragStart(event) {
+    // according to some basic math caculation
+    initialOffset = [dragItem.offsetLeft - event.clientX, dragItem.offsetTop - event.clientY]
+  }
+
+  function drag(event) {
+    event.preventDefault()
+    if (event.clientX | event.clientY !== 0) {
+      dragItem.style.left = initialOffset[0] + event.clientX + 'px'
+      dragItem.style.top = initialOffset[1] + event.clientY + 'px'
+    }
+  }
+
+  dragItem.addEventListener('dragstart', dragStart)
+  dragItem.addEventListener('drag', drag)
+  dragItem.addEventListener('dragover', (e) => e.preventDefault())
+</script>
+
+</html>
