@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<title>面向小白的爬虫教学（1） | 抓包</title>
+</head>
+
+<body>
+	<h1>面向小白的爬虫小教学（1） | 抓包</h1>
+
+	<h2>WHY</h2>
+
+	<p>爬虫的本质是用计算机程序模拟人类用户获取并解析网页（或App）开放的信息。</p>
+
+	<p>要了解爬虫是怎么获得目标信息的需要了解网页是如何提供信息的。</p>
+
+	<p>如果做一番“T恤是怎么从原材料到服装店”的详述将会非常冗长，所以下面我只讲解爬虫程序必须了解的部分。</p>
+
+	<p>以高德地图上装修公司的电话为例。</p>
+
+	<figure><img src="CleanShot%202024-03-05%20at%2009.42.41@2x.png" /></figure>
+
+	<p>
+		你的电脑能显示出“17600300724”，是因为浏览器向服务器发起了<mark>请求</mark>“给我用户点击了的那个商家的所有相关信息”，而这些信息通常都被服务器包装成了<mark>json格式</mark>以及从中解析数据需要的js代码返回给了浏览器——json格式的数据就像一个宝箱，而负责解析的js代码则是钥匙，浏览器拿钥匙打开宝箱，然后获得了商家名字、评分、地址等等信息，最后才能显示出上图的结果。
+	</p>
+
+	<p>知道人类用户是怎么获得信息后，我们就可以开始模拟这个行为了，其中最关键的部分在于我们怎么像浏览器一样拿到服务器发放的宝箱——json数据呢？</p>
+
+	<p>我们的手段是抓包。</p>
+
+	<blockquote>
+		<p>注：这里只讨论了最简单的情况，如果服务器有严格的反爬虫手段——发宝箱的金库主担心把宝箱发出去会被人半路截获——就会想尽办法不让你拿到关键的json数据，这时候使用我后面介绍的抓包方法可能会发现找不到想要的json数据。</p>
+	</blockquote>
+
+	<h2>HOW</h2>
+
+	<p>抓包就是在服务器返回信息之后，浏览器拿到信息之前，半途截取到信息的手段。</p>
+
+	<p>因为市面上已经有很成熟的抓包工具了，所以这个部分不需要我们亲手来写。</p>
+
+	<p>常见的抓包工具有：Fiddler, Charles, Mitmproxy, Wireshark, Proxyman等。</p>
+
+	<p>这里我使用的是macOS上颜值最高的<a href="https://proxyman.io/">Proxyman</a>。</p>
+
+	<h3>安装与配置Proxyman</h3>
+
+	<p>在官网下载安装以后，请按照这篇文章的第二节安装证书：</p>
+
+	<p><a href="https://zhuanlan.zhihu.com/p/615245447">抓包工具Proxyman介绍</a></p>
+
+	<p>打开Proxyman，确保状态栏是正在监听的状态：</p>
+
+	<figure><img src="CleanShot%202024-03-05%20at%2010.24.23@2x.png" /></figure>
+
+	<p>这时打开任意网页，窗口内如果能获得监听到的所有浏览器发出的请求——表现为不断要新数据出现——就说明已经安装并配置成功了。</p>
+
+	<blockquote>
+		<p>严格的讲，Proxyman只能监听到HTTP/HTTPS请求，除了HTTP、HTTPS还有TDP、UDP请求等等，要想监听到其他类型的请求需要换用不同的工具，这些细节不影响我们的操作就不深入讨论了。</p>
+	</blockquote>
+
+	<h3>实战：获取电话号码</h3>
+
+	<p>为了等会儿方便找，现在可以先清空proxyman已经监听到的信息，选择任意一条信息，<code>⌘ + A</code>全选，<code>Delete</code>删除即可。</p>
+
+	<p>打开<a href="https://www.amap.com/place/B0G39NKA4B">目标网址</a>
+		<code>https://www.amap.com/place/B0G39NKA4B</code>，观察Proxyman获得的信息，要获得的信息就藏在新监听到的数据当中，大约两三秒后可以按下左上角的暂停按钮，下面开始筛选信息。
+	</p>
+
+	<p>Proxyman应该会显示一大列类似下图的数据——</p>
+
+	<figure><img src="CleanShot%202024-03-05%20at%2010.48.55@2x.png" /></figure>
+
+	<p>点开任意一条以<code>https://www.amap.com/</code>开头的请求</p>
+
+	<figure><img src="CleanShot%202024-03-05%20at%2010.47.34@2x.png" /></figure>
+
+</body>
+
+</html>
