@@ -4,20 +4,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Home Page</title>
+  <link rel="stylesheet" href="output.css">
 </head>
 
 <body>
-  <h1>Tricks</h1>
+  <header class="intro">
+    Hi, My name is Melvin Yew.
+  </header>
+
+  <main class="container grid grid-cols-12 gap-4">
+    <div class="card col-span-8 row-span-1">
+      <video id="scrollVideo" class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/001.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-4 row-span-2">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/002.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-8 row-span-1">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/003.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-12">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/004.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-4">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/005.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-4">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/006.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-4">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/007.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="card col-span-12">
+      <video class="preview_video" preload="auto" width="100%" height="100%">
+        <source src="./img/008.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+    </div>
+  </main>
+  <!-- <h1>Tricks</h1>
   <ol>
     <li><a href="./tricks/1.sidebar-menu/index.html">Sidebar Menu</a></li>
     <li><a href="./tricks/2.circular-prograssbar/">Circular Prograssbar</a></li>
     <li><a href="./tricks/3.animation-effects/">Animation Effects</a></li>
     <li><a href="./tricks/4.glowing-border/">Glowing border</a></li>
     <li><a href="./tricks/5.scroll-magic/">Scroll Magic</a></li>
-    <li><a href="./tricks/5.scroll-magic/">Scroll Magic</a></li>
-    <li><a href="./tricks/7.jigsaw-puzzle/">Scroll Magic</a></li>
-    <li><a href="./tricks/8.illusion-canvas/">Scroll Magic</a></li>
+    <li><a href="./tricks/6.click-magic/">Click Magic</a></li>
+    <li><a href="./tricks/7.jigsaw-puzzle/">Jigsaw Puzzle</a></li>
+    <li><a href="./tricks/8.illusion-canvas/">Illusion Canvas</a></li>
   </ol>
   <h1>Projects</h1>
   <ol>
@@ -27,7 +74,42 @@
   <h1>Articles</h1>
   <ol>
     <li><a href="./articles/1.crawler/index.html">面向小白的爬虫教学（1）|抓包</a></li>
-  </ol>
+  </ol> -->
+  <script>
+    let videos = document.getElementsByClassName('preview_video')
+    function startPreview(video) {
+      video.muted = true;
+      video.currentTime = 1;
+      video.playbackRate = 1;
+      if (video.id === 'scrollVideo') {
+        // 微调一下scroll的速度
+        video.playbackRate = 0.4;
+      }
+      video.play();
+    }
+
+    function stopPreview(video) {
+      video.pause();
+    }
+
+    let previewTimeout = null;
+
+    for (let i = 0; i < videos.length; i++) {
+      const video = videos[i];
+      console.log(video)
+      video.addEventListener("mouseenter", () => {
+        startPreview(video);
+        // previewTimeout = setTimeout(stopPreview, 4000);
+      });
+
+      video.addEventListener("mouseleave", () => {
+        // clearTimeout(previewTimeout);
+        // previewTimeout = null;
+        stopPreview(video);
+      });
+    }
+  </script>
 </body>
+
 
 </html>
