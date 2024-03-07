@@ -10,7 +10,9 @@
 
 <body>
   <header class="intro">
-    Hi, My name is Melvin Yew.
+    <div class="text-3xl">Hi, My name is Melvin Yew.</div>
+    <!-- <div class="text-md text-gray-400">Want to know more about me? You can read my articles <a href="./articles"><span
+          class="text-blue-600">here</span></a>.</div> -->
   </header>
 
   <main class="container grid grid-cols-12 gap-4">
@@ -58,26 +60,6 @@
       </video>
     </div>
   </main>
-  <!-- <h1>Tricks</h1>
-  <ol>
-    <li><a href="./tricks/1.sidebar-menu/index.html">Sidebar Menu</a></li>
-    <li><a href="./tricks/2.circular-prograssbar/">Circular Prograssbar</a></li>
-    <li><a href="./tricks/3.animation-effects/">Animation Effects</a></li>
-    <li><a href="./tricks/4.glowing-border/">Glowing border</a></li>
-    <li><a href="./tricks/5.scroll-magic/">Scroll Magic</a></li>
-    <li><a href="./tricks/6.click-magic/">Click Magic</a></li>
-    <li><a href="./tricks/7.jigsaw-puzzle/">Jigsaw Puzzle</a></li>
-    <li><a href="./tricks/8.illusion-canvas/">Illusion Canvas</a></li>
-  </ol>
-  <h1>Projects</h1>
-  <ol>
-    <li><a href="./projects/uzi/">Uzi Landingpage</a></li>
-    <li><a href="./projects/fromsoftware/">Fromsoftware Landingpage</a></li>
-  </ol>
-  <h1>Articles</h1>
-  <ol>
-    <li><a href="./articles/1.crawler/index.html">面向小白的爬虫教学（1）|抓包</a></li>
-  </ol> -->
   <script>
     // VIDEO PLAY
     let videos = document.getElementsByClassName('preview_video')
@@ -121,19 +103,18 @@
     }
 
     // DEBUG CODE
-    let cards = document.getElementsByClassName('card')
-    for (card of cards) {
-      tag = document.createElement('div')
-      tag.className = 'video-tag'
-      const vidRe = /\.\/img\/(....mp4)/i
-      let result = vidRe.exec(card.innerHTML)
-      if (result !== null) {
-        vidStr = result[1]
-        tag.innerText = vidStr
-        card.appendChild(tag)
-      }
-
-    }
+    // let cards = document.getElementsByClassName('card')
+    // for (card of cards) {
+    //   tag = document.createElement('div')
+    //   tag.className = 'video-tag'
+    //   const vidRe = /\.\/img\/(....mp4)/i
+    //   let result = vidRe.exec(card.innerHTML)
+    //   if (result !== null) {
+    //     vidStr = result[1]
+    //     tag.innerText = vidStr
+    //     card.appendChild(tag)
+    //   }
+    // }
   </script>
 </body>
 

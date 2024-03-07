@@ -17,7 +17,6 @@ body {
 
 header.intro {
   margin: 3rem 0;
-  font-size: 3rem;
 }
 
 main.container {
@@ -25,7 +24,7 @@ main.container {
 }
 
 main .card {
-  border-radius: 50px;
+  border-radius: 2rem;
   background: #e0e0e0;
   overflow: hidden;
   position: relative;
