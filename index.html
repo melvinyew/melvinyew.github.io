@@ -15,42 +15,45 @@
 
   <main class="container grid grid-cols-12 gap-4">
     <div class="card col-span-8 row-span-1">
-      <video id="scrollVideo" class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/001.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
+      <div class="video-tag">
+        pic 1
+      </div>
     </div>
     <div class="card col-span-4 row-span-2">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/002.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
     <div class="card col-span-8 row-span-1">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/003.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
     <div class="card col-span-12">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/004.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
     <div class="card col-span-4">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/005.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
     <div class="card col-span-4">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/006.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
     <div class="card col-span-4">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/007.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
     <div class="card col-span-12">
-      <video class="preview_video" preload="auto" width="100%" height="100%">
+      <video class="preview_video" preload="auto">
         <source src="./img/008.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
@@ -76,10 +79,17 @@
     <li><a href="./articles/1.crawler/index.html">面向小白的爬虫教学（1）|抓包</a></li>
   </ol> -->
   <script>
+    // VIDEO PLAY
     let videos = document.getElementsByClassName('preview_video')
     function startPreview(video) {
       video.muted = true;
-      video.currentTime = 1;
+      // video play state (without react XD)
+      if (!video.storedTime) {
+        video.currentTime = 1;
+        video.storedTime = video.currentTime;
+      } else {
+        video.currentTime = video.storedTime;
+      }
       video.playbackRate = 1;
       if (video.id === 'scrollVideo') {
         // 微调一下scroll的速度
@@ -89,6 +99,7 @@
     }
 
     function stopPreview(video) {
+      video.storedTime = video.currentTime
       video.pause();
     }
 
@@ -107,6 +118,21 @@
         // previewTimeout = null;
         stopPreview(video);
       });
+    }
+
+    // DEBUG CODE
+    let cards = document.getElementsByClassName('card')
+    for (card of cards) {
+      tag = document.createElement('div')
+      tag.className = 'video-tag'
+      const vidRe = /\.\/img\/(....mp4)/i
+      let result = vidRe.exec(card.innerHTML)
+      if (result !== null) {
+        vidStr = result[1]
+        tag.innerText = vidStr
+        card.appendChild(tag)
+      }
+
     }
   </script>
 </body>

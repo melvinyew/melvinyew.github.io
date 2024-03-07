@@ -24,7 +24,7 @@
       font-size: 4rem;
       display: flex;
       font-weight: 400;
-      -webkit-box-reflect: below -38px linear-gradient(transparent, #0002);
+      -webkit-box-reflect: below -2rem linear-gradient(transparent, #0002);
     }
 
     h1 span:nth-child(n+14) {
@@ -37,6 +37,13 @@
       top: 1rem;
       right: 1rem;
       writing-mode: vertical-lr;
+    }
+
+    @media screen and (max-width: 800px) {
+      h1 {
+        font-size: 2rem;
+        -webkit-box-reflect: below -1rem linear-gradient(transparent, #0002);
+      }
     }
   </style>
 </head>
