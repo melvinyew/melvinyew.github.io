@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>The Little Python：以猜数字游戏为例的Python入门教学</title>
+	</head>
+<body>
+<h1>The Little Python：以猜数字游戏为例的Python入门教学</h1>
+
+<h2>（一）</h2>
+
+<p>首先，这不是一篇循规蹈矩、按部就班的Python入门教程，如果想要系统学习Python，网络上有很多资源，比较优质的有<a href="https://docs.python.org/zh-cn/3/tutorial/index.html">Python官方教程</a>或者<a href="https://www.liaoxuefeng.com/wiki/1016959663602400">廖雪峰老师的教程</a>等等。这是一篇帮助零基础的朋友透过一个案例迅速了解Python语言基本语法的速成教程。虽然有以管窥豹的不足，但对于初学者一次浅尝辄止的尝试来说，这篇教程涵盖的内容应当是绰绰有余的了。</p>
+
+<p>我将以一种“以问促学”的方式带你快速熟悉Python语言的基本用法。在一开始我就会让你读到完成一个“猜数字游戏”的全部Python代码，这时候你一定会有许多疑问，但不要着急，先按照我的提示认真阅读代码，随后我会以设问的方式帮助你解决代码中各种“这部分是什么意思”的疑问。在理解基本的语法规则后，我会概括一遍整个程序的运行逻辑以帮助你理解整个程序的全貌。整篇文章可能涵盖了Python最常用的语法知识点中60%的内容，对于初学者而言可能不容易消化，但耐心读完相信你一定能有所收获。</p>
+
+<p>首先，请花一段时间认真阅读下面这段代码，注意阅读顺序：</p>
+
+<p>先找到代码中后段注明了“1：从这里开始读”的地方作为阅读的起点，从上往下读完，再回到最开头的位置从上往下读。</p>
+
+<pre><code class="code-highlighted code-python"><span class="syntax-all syntax-comment"># 2: 继续往下读
+</span><span class="syntax-all syntax-comment"># 这个程序中涉及一个很经典的操作：生成一个随机数
+</span><span class="syntax-all syntax-comment"># 像这类经典操作程序员们是不会每次都从零开始编写一遍的，而是编写一遍后把这部分代码包装后，以后需要的时候直接调用就可以了
+</span><span class="syntax-all syntax-comment"># 我们可以把这类代码专门放置在一个文件中，称之为模块
+</span><span class="syntax-all syntax-comment"># 实际上，当你安装python的时候你同时也安装了一系列由python官方编写好的模块
+</span><span class="syntax-all syntax-comment"># 其中 random 就是一个专门负责随机数相关操作的模块
+</span><span class="syntax-all syntax-comment"># 因为这次我打算生成1~10的随机整数，这个功能可以使用其中的 randint 函数实现
+</span><span class="syntax-all syntax-comment"># 像下面这样写，在之后的代码中我们就可以直接使用这个函数来生成随机数了
+</span><span class="syntax-all syntax-keyword">from</span> random <span class="syntax-all syntax-keyword">import</span> randint
+
+<span class="syntax-all syntax-comment"># 一开始需要猜一个数字，猜错后又需要继续猜，猜数的操作将要重复出现，可以把这部分重复的操作单纯包装为一个函数
+</span><span class="syntax-all syntax-comment"># 函数就是一系列操作的集合，这里给它命名为&#39;get_input&#39;，那么每次使用这个函数的时候都会将内部的操作执行一遍
+</span><span class="syntax-all syntax-keyword">def</span> <span class="syntax-all syntax-entity">get_input</span>():
+    user_input <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-constant">input</span>()
+    <span class="syntax-all syntax-keyword">while</span> <span class="syntax-all syntax-keyword">not</span> user_input.isnumeric() <span class="syntax-all syntax-keyword">or</span> <span class="syntax-all syntax-constant">int</span>(user_input) <span class="syntax-all syntax-keyword">&lt;</span> <span class="syntax-all syntax-constant">1</span> <span class="syntax-all syntax-keyword">or</span> <span class="syntax-all syntax-constant">int</span>(user_input) <span class="syntax-all syntax-keyword">&gt;</span> <span class="syntax-all syntax-constant">10</span>:
+        <span class="syntax-all syntax-constant">print</span>(<span class="syntax-all syntax-string">&quot;只能猜1~10之间的数字哦，请重新猜一个数字吧：&quot;</span>)
+        user_input <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-constant">input</span>()
+    <span class="syntax-all syntax-keyword">return</span> <span class="syntax-all syntax-constant">int</span>(user_input)
+
+
+<span class="syntax-all syntax-comment"># 1: 从这里开始读
+</span><span class="syntax-all syntax-comment"># &#39;#&#39;字开头的语句叫注释语句，程序实际运行时将无视这些语句
+</span><span class="syntax-all syntax-keyword">if</span> <span class="syntax-all syntax-constant">__name__</span> <span class="syntax-all syntax-keyword">==</span> <span class="syntax-all syntax-string">&quot;__main__&quot;</span>:
+    <span class="syntax-all syntax-comment"># 在控制台打印提示语句
+</span>    <span class="syntax-all syntax-constant">print</span>(<span class="syntax-all syntax-string">&quot;欢迎来到猜数字游戏！&quot;</span>)
+    <span class="syntax-all syntax-constant">print</span>(<span class="syntax-all syntax-string">&quot;请猜一个1到10之间的整数：&quot;</span>)
+    <span class="syntax-all syntax-comment"># randint(1, 10)将生成一个1到10之间的随机整数
+</span>	<span class="syntax-all syntax-comment"># 我们把生成的整数保存到一个名叫number_to_guess的变量当中
+</span>    number_to_guess <span class="syntax-all syntax-keyword">=</span> randint(<span class="syntax-all syntax-constant">1</span>, <span class="syntax-all syntax-constant">10</span>)
+    <span class="syntax-all syntax-comment"># 记录猜测次数的变量，一开始为0
+</span>    guesses <span class="syntax-all syntax-keyword">=</span> <span class="syntax-all syntax-constant">0</span>
+    <span class="syntax-all syntax-keyword">while</span> <span class="syntax-all syntax-constant">True</span>:
+        user_input_number <span class="syntax-all syntax-keyword">=</span> get_input()
+        guesses <span class="syntax-all syntax-keyword">+=</span> <span class="syntax-all syntax-constant">1</span>
+        <span class="syntax-all syntax-keyword">if</span> number_to_guess <span class="syntax-all syntax-keyword">==</span> user_input_number:
+            <span class="syntax-all syntax-constant">print</span>(f<span class="syntax-all syntax-string">&#39;恭喜你猜对了！你总共猜了</span><span class="syntax-all syntax-constant">{guesses}</span><span class="syntax-all syntax-string">次。&#39;</span>)
+            <span class="syntax-all syntax-keyword">break</span>
+        <span class="syntax-all syntax-keyword">else</span>:
+            <span class="syntax-all syntax-keyword">if</span> number_to_guess <span class="syntax-all syntax-keyword">&lt;</span> user_input_number:
+                <span class="syntax-all syntax-constant">print</span>(<span class="syntax-all syntax-string">&#39;不对，没那么大&#39;</span>)
+            <span class="syntax-all syntax-keyword">else</span>:
+                <span class="syntax-all syntax-constant">print</span>(<span class="syntax-all syntax-string">&#39;不对，没那么小&#39;</span>)</code></pre>
+
+<blockquote>
+<p>如果已经安装并配置好了Python运行环境，建议把代码复制粘贴到代码编辑器中，保存并亲自运行看看效果，阅读代码时如果好奇某部分代码的作用是否如你设想的那样，你也可以动手修改试试看。</p>
+</blockquote>
+
+<h2>（二）</h2>
+
+<p>问：<code>from</code>是什么？</p>
+
+<p>答：<code>from</code>是操作，是一个<strong>关键字</strong>。</p>
+
+<p>操作表示对数据进行某种处理。关键字是Python内置的操作。</p>
+
+<p>问：<code>random</code>也是一个关键字吗？</p>
+
+<p>答：不是。</p>
+
+<p><code>random</code>是数据，是一个<strong>模块</strong>，在数据当中，它属于<strong>对象</strong>。</p>
+
+<p>关键字是python语言用来表示特定<strong>操作</strong>的单词，而<strong>模块</strong>是一个存放了python代码的文件，这里<code>random</code>是这个模块的名字。对象是数据的一种类型，其他类型还有数字、字符串等等。</p>
+
+<p>问：<code>import</code>是一个关键字吗？</p>
+
+<p>答：是的。</p>
+
+<p>它和<code>from</code>在这里表示导入<code>random</code>模块当中的<code>randint</code>函数的操作。导入模块的操作我们一般放在所有其他语句的前面。</p>
+
+<p>问：<code>def</code>是一个关键字吗？</p>
+
+<p>答：是的。</p>
+
+<p>它表示定义(define)一个函数的操作，随后接着函数的名字与参数，再之后缩进一层作用域后是这个函数的内容——称之为函数体。</p>
+
+<p>问：那么<code>get_input</code>是数据吗？</p>
+
+<p>答：是的。</p>
+
+<p><code>get_input</code>是<code>def</code>所定义的函数的名字。Python规定函数名只能由字母、数字与下划线组成，且不能以数字开头，也不能和关键字重名。在符合这个规定的条件下你可以随意修改这个名字。</p>
+
+<p>问：<code>get_input</code>后面的<code>()</code>是什么意思？</p>
+
+<p>答：是放入参数用的符号，里面为空表示没有参数。</p>
+
+<p>有的函数运行时需要参数，例如<code>print(&#39;hi&#39;)</code>里面的<code>hi</code>就是<code>print</code>函数的参数。参数是供函数内部使用的数据。</p>
+
+<p>问：句子最后面的<code>:</code>是什么？</p>
+
+<p>答：是分割<strong>作用域</strong>用的符号，Python用<code>:</code>以及缩进来分割作用域。</p>
+
+<p>缩进也就是代码句子前的空格，一般每四个空格代表一层作用域，相同作用域的代码需要保持一致的缩进，再多四个空格表示更深一层的作用域，以此类推。例如这段代码中，假设第1行到第13行位于第一层作用域，那么14,15,18属于第二层作用域，16，17则是第三层作用域。逻辑上，作用域表示了代码的从属关系，16,17行从属于第15行的<code>while</code>语句，14,15,18行则从属于13行的<code>def</code>语句。</p>
+
+<p>问：<code>user_input</code>是什么？</p>
+
+<p>答：<code>user_input</code>是数据，是一个<strong>变量</strong>。</p>
+
+<p>变量是允许修改的数据。在这里<code>user_input</code>存储<code>input()</code>函数返回的数据。Python规定变量的名字只能由字母、数字与下划线组成，且不能以数字开头，也不能与关键字重名。在符合这个规定的条件下你可以随意修改这个名字。</p>
+
+<p>问：<code>input()</code>是什么？</p>
+
+<p>答：<code>input()</code>是Python语言内置的<strong>函数</strong>。</p>
+
+<p>内置函数不需要导入也不需要定义，可以随时随地使用。<code>input()</code>的作用是从控制台读取一行用户输入的数据，并返回这个数据，这个数据的类型是<strong>字符串</strong>。函数是操作的集合，例如这里的操作就是读取用户输入。并且函数可以有<strong>返回值</strong>，表示完成操作以后函数对外返回的结果。这里返回的结果将被存储在<code>user_input</code>变量中。Python提供的所有内置函数你可以在<a href="https://docs.python.org/zh-cn/3/library/functions.html#input">这个页面</a>找到。</p>
+
+<p>问：<code>user_input = input()</code>中的<code>=</code>是相等的意思吗？</p>
+
+<p>答：不是。</p>
+
+<p><code>=</code>是操作，是一个<strong>操作符</strong>，它表示将右侧的数据计算出来后传输给左侧。我们称之为<strong>赋值</strong>操作。所以这个句子正确的阅读顺序是先读右侧再读左侧，其含义是“读取一行用户输入的数据，然后把数据存储在名字叫<code>user_input</code>的变量当中”。</p>
+
+<p>问：<code>while</code>是一个关键字吗？</p>
+
+<p>答：是的。它表示循环操作，其后紧接着循环操作的条件，再之后缩进一层的作用域是循环操作的内容——称之为循环体。当<code>while</code>其后的循环条件计算结果为<code>真(True)</code>时，循环体将从上至下反复运行，直至循环条件为<code>假（False）</code>。</p>
+
+<p>问：<code>not user_input.isnumeric()</code>是什么？</p>
+
+<p>答：是一个布尔表达式。</p>
+
+<p>表示判断<code>user_input</code>是否可以表示为数字，如果可以那么返回布尔类型的数据<code>False</code>，否则返回<code>True</code>。</p>
+
+<p><code>not</code>是操作，是一个操作符，是一个布尔运算符，表示“非”，用于得到随后一个布尔类型的数据的相反值，<code>not True</code>的结果是<code>False</code>，<code>not False</code>的结果是<code>True</code>。另外两个布尔运算符<code>or</code>与<code>and</code>分别表示“或”和“与”，与数学上的意义相同。</p>
+
+<p><code>isnumeric()</code>是字符串类型的数据都可以使用的一个函数，其返回值是一个布尔类型的数据，代表这个字符串可不可以表示为数字。例如<code>&#39;19&#39;</code>可以，而<code>&#39;x&#39;</code>不可以，那么<code>&#39;19&#39;.isnumeric()</code>的返回值就是<code>True</code>，而<code>&#39;x&#39;.isnumeric()</code>的返回值则为<code>False</code>。当数据可以使用一个函数时，用点号<code>.</code>来使用它。</p>
+
+<p>布尔表达式进行布尔运算，并返回<code>True</code>或<code>False</code>。</p>
+
+<p>问：<code>int(user_input) &lt; 1</code>也是布尔表达式吗？</p>
+
+<p>答：是的。</p>
+
+<p><code>int()</code>是一个内置函数，作用是得到一个数据转换为数字类型之后的结果。</p>
+
+<p>问：<code>return</code>是一个关键字吗？</p>
+
+<p>答：是的。</p>
+
+<p>它表示将随后的数据作为函数体的返回结果，在这一层作用域内程序运行完这一行后就会返回上一层作用域继续往下运行，所有与<code>return</code>语句在同一作用域，位置还要靠下的语句不会被程序运行。</p>
+
+<p>这个例子中，函数<code>get_input</code>的返回值是<code>int(user_input()</code></p>
+
+<p>问：<code>if</code>是一个关键字吗？</p>
+
+<p>答：是的。</p>
+
+<p>它表示判断操作，如果其后的布尔表达式返回为<code>True</code>，那么其后缩进的判断体将被执行，否则不执行。</p>
+
+<p>问：<code>__name__ == &#39;__main__&#39;</code>是一个布尔表达式吗？</p>
+
+<p>答：是的。</p>
+
+<p><code>__name__</code>是一个Python内置的变量，当这个Python文件被直接运行时，文件中这个变量的值为<code>__main__</code>，而Python文件通过<code>import</code>的方式被导入时，文件中这个变量的值是文件名。</p>
+
+<p><code>==</code>是一个操作符，是一个比较运算符，它比较左右两边的值是否相等，如果相等则返回<code>True</code>否则返回<code>False</code>。</p>
+
+<p>所以这里表示只有当文件被直接运行时才执行后面作用域里的代码。</p>
+
+<p>一般，我们把脚本任务的主要流程放在这一句之后，而把完成任务需要的准备工作放在这句话之前（例如导入模块、定义函数等等）。</p>
+
+<h2>（三）</h2>
+
+<p>问：<code>number_to_guess</code>是一个变量吗？</p>
+
+<p>答：是的。</p>
+
+<p>问：<code>randint(1, 10)</code>中的<code>1</code>和<code>10</code>是参数吗？</p>
+
+<p>答：是的。</p>
+
+<p><code>randint()</code>是一个接收两个参数的函数，返回值是一个介于第一个参数而第二个参数数值范围之间的一个随机整数（取值范围包括两个参数）。</p>
+
+<p>问：<code>guesses</code>是一个变量吗？</p>
+
+<p>答：是的。</p>
+
+<p>问：<code>while</code>后面接的布尔表达式直接就是<code>True</code>不会导致永远不会退出循环体吗？</p>
+
+<p>答：如果没有退出循环的语句，这个循环的确会无限进行下去——称之为死循环。第<code>37</code>行的<code>break</code>是一个关键字，当程序运行到这一行时就直接跳出循环体。因为我们的需求是一直等到用户输入一个1到10之间的数字，所以这里的死循环是刻意为之的。</p>
+
+<p>问：<code>+=</code>是什么？</p>
+
+<p>答：是操作符，是自加运算符，<code>guesses += 1</code>表示<code>guesses = guesses + 1</code>，也就是把<code>guesses+1</code>后的结果赋值给<code>guesses</code>，从而实现让<code>guesses</code>变量存储的数值加一。</p>
+
+<p>问：<code>f&#39;恭喜你猜对了！你总共猜了{guesses}次。&#39; </code>是什么？</p>
+
+<p>答：是一个字符串数据，其中<code>f</code>与<code>{}</code>组合使用，用来给字符串当中插入变量的值，假设<code>guesses</code>变量的值为<code>3</code>，那么这个字符串等效于<code>恭喜你猜对了！你总共猜了3次。 </code></p>
+
+<p>问：<code>else</code>是什么？</p>
+
+<p>答：<code>else</code>是一个关键字，需要与<code>if</code>配合使用，当<code>if</code>随后的表达式为<code>False</code>时，程序执行随后的<code>else</code>语句，也就是说一次运行当中，要么运行<code>if</code>当中的语句，要么运行<code>else</code>当中的语句。</p>
+
+<h2>（四）</h2>
+
+<p>如果你已经理解了以上提出的每一个问题，那么读懂这段代码所需要的所有理论知识你都已经具备了。现在我们可以概括一下这段代码是怎么工作的。</p>
+
+<p>当程序开始运行时，首先会在控制台打印两句话——</p>
+
+<blockquote>
+<p>欢迎来到猜数字游戏！</p>
+
+<p>请猜一个1到10之间的整数：</p>
+</blockquote>
+
+<p>随后，程序将创建两个变量。</p>
+
+<p>一个变量名为<code>number_to_guess</code>，用与存储生成的随机整数。</p>
+
+<p>另一个变量名为<code>guesses</code>，用于计数用户一共猜了几次，初始值为0。</p>
+
+<p>之后程序将进入一个刻意设计的死循环，循环只有在用户猜中了正确数字时才会退出。</p>
+
+<p>在循环的一开始，程序将调用定义好的函数<code>get_input</code>以获得一个用户输入的1到10之间的整数。在用户输入合规的数据之前，<code>get_input</code>函数每次都会打印：</p>
+
+<blockquote>
+<p>只能猜1~10之间的数字哦，请重新猜一个数字吧：</p>
+</blockquote>
+
+<p>而在用户输入合规的数据之后，<code>guesses</code>变量的数值马上就会加一，表示猜测次数的增加。</p>
+
+<p>紧接着程序开始判断用户猜测的数字与实现存储在<code>number_to_guess</code>中的数字是否相同，并衍生出三种情况：</p>
+
+<ol>
+	<li>相同</li>
+	<li>太大了</li>
+	<li>太小了</li>
+</ol>
+
+<p>不同情况都有各自的打印语句。如果结果不同，程序将回到循环体的第一步继续运行，直到结果相同为止。</p>
+
+<p>（完）</p>
+
+</body>
+</html>
+

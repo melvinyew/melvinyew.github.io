@@ -5,13 +5,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Articles</title>
+  <link rel="stylesheet" href="../output.css">
 </head>
 
 <body>
-  <h1>Articles</h1>
-  <ol>
-    <li><a href="./1.crawler/index.html">面向小白的爬虫教学（1）|抓包</a></li>
-  </ol>
+  <header>
+    <h1 class="text-3xl">Articles</h1>
+  </header>
+  <main class="container">
+    <div id="article-list">
+      <a href="./2.api/index.html">
+        <div
+          class="p-10 m-10 bg-white cursor-pointer shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)] hover:p-10 hover:m-10 hover:scale-105">
+          <h2>The Little Python：以猜数字游戏为例的Python入门教学</h2>
+          <br>
+          <p>
+            首先，这不是一篇循规蹈矩、按部就班的Python入门教程，如果想要系统学习Python，网络上有很多资源，比较优质的有Python官方教程或者廖雪峰老师的教程等等。这是一篇帮助零基础的朋友透过一个案例迅速了解Python语言基本语法的速成教程。虽然有以管窥豹的不足，但对于初学者一次浅尝辄止的尝试来说，这篇教程涵盖的内容应当是绰绰有余的了。（...）
+          </p>
+        </div>
+      </a>
+      <a href="./1.crawler/index.html">
+        <div
+          class="hover:bg-red p-10 m-10 bg-white cursor-pointer shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)] hover:p-10 hover:m-10 hover:scale-105">
+          <h2>面向小白的爬虫教学（1）|抓包</h2>
+          <br>
+          <p>
+            爬虫的本质是用计算机程序模拟人类用户获取并解析网页（或App）开放的信息。
+            要了解爬虫是怎么获得目标信息的需要了解网页是如何提供信息的。
+            如果做一番“T恤是怎么从原材料到服装店”的详述将会非常冗长，所以下面我只讲解爬虫程序必须了解的部分。（...）
+          </p>
+        </div>
+      </a>
+    </div>
+  </main>
 </body>
 
 </html>
