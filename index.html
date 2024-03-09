@@ -12,21 +12,23 @@
   <header class="intro">
     <div class="text-3xl text-center max-sm:text-xl">Hi, My name is Melvin Yew.</div>
     <div class="text-md text-center max-sm:text-sm text-gray-400">Want to know more about me? You can read my articles
-      <a href="./articles"><span class="text-blue-600">here</span></a>.</div>
+      <a href="./articles"><span class="text-blue-600">here</span></a>.
+    </div>
   </header>
 
   <main class="container w-10/12 grid grid-cols-12 gap-x-1 gap-y-4 justify-items-center">
     <div
-      class="cursor-pointer bg-slate-100 border rounded-xl w-96 h-60 object-cover overflow-hidden col-span-4 max-xl:w-80 max-xl:h-50 max-lg:col-span-6 max-md:col-span-12">
+      class="cursor-pointer bg-slate-100 border rounded-xl w-96 h-54 object-cover overflow-hidden col-span-4 max-xl:w-80 max-xl:h-50 max-lg:col-span-6 max-md:col-span-12">
       <video loop class="preview_video" preload="auto">
         <source src="./img/001.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
     </div>
-    <!-- <div class="cursor-pointer bg-slate-100 border rounded-xl w-96 h-60 object-cover overflow-hidden col-span-4 max-xl:w-80 max-xl:h-50 max-lg:col-span-6 max-md:col-span-12">
+    <div
+      class="cursor-pointer bg-slate-100 border rounded-xl w-96 h-60 object-cover overflow-hidden col-span-4 max-xl:w-80 max-xl:h-50 max-lg:col-span-6 max-md:col-span-12">
       <video loop class="preview_video" preload="auto">
         <source src="./img/002.mp4" type="video/mp4">Your browser does not support the video tag.
       </video>
-    </div> -->
+    </div>
     <div
       class="cursor-pointer bg-slate-100 border rounded-xl w-96 h-60 object-cover overflow-hidden col-span-4 max-xl:w-80 max-xl:h-50 max-lg:col-span-6 max-md:col-span-12">
       <video loop class="preview_video" preload="auto">
@@ -64,6 +66,7 @@
       </video>
     </div>
   </main>
+  <footer class="mt-12 mb-6">Made with 💚</footer>
   <script>
     // VIDEO PLAY
     let videos = document.getElementsByClassName('preview_video')
@@ -71,16 +74,12 @@
       video.muted = true;
       // video play state (without react XD)
       if (!video.storedTime) {
-        video.currentTime = 1;
+        video.currentTime = 0;
         video.storedTime = video.currentTime;
       } else {
         video.currentTime = video.storedTime;
       }
       video.playbackRate = 1;
-      if (video.id === 'scrollVideo') {
-        // 微调一下scroll的速度
-        video.playbackRate = 0.4;
-      }
       video.play();
     }
 
