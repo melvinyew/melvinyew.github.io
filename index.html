@@ -103,6 +103,27 @@
         // previewTimeout = null;
         stopPreview(video);
       });
+
+      video.addEventListener('click', () => {
+        switch (i) {
+          case 0:
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+            window.location.href = `./tricks/${i + 1}`
+            break;
+          case 6:
+            window.location.href = `./projects/fromsoftware`
+            break;
+          case 7:
+            window.location.href = `./projects/uzi`
+            break;
+          default:
+            break;
+        }
+      })
     }
 
     // DEBUG CODE
